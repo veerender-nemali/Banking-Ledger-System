@@ -76,4 +76,9 @@ async function userLogincontroller(req, res) {
     }
 }
 
-module.exports = { userRegisterController, userLogincontroller }
+async function userLogoutController(req, res) {
+    res.clearCookie("token")
+    res.send({ message: "User logged out successfully", status: 'success' })
+}
+
+module.exports = { userRegisterController, userLogincontroller, userLogoutController }
