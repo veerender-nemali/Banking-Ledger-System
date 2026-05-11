@@ -1,4 +1,5 @@
 const userModel = require("../models/user.model")
+const emailService = require("../services/email.service")
 
 async function userRegisterController(req, res) {
     try {
@@ -32,6 +33,8 @@ async function userRegisterController(req, res) {
                 email: savedUser.email
             }
         })
+
+        await emailService.sendRegistrationEmail(user.email, user.name)
 
     } catch (err) {
         console.log(err)
