@@ -63,11 +63,11 @@ accountSchema.methods.getBalance = async function () {
         }
     ])
 
-    if (balanceData.length === 0) {
+    if (balance.length === 0) {
         return 0
     }
 
-    return balanceData[0].balance
+    return balance[0].balance
 }
 
 const Account = mongoose.model("Account", accountSchema)

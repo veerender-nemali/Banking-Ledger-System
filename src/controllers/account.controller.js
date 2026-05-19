@@ -36,4 +36,38 @@ async function getAllUserAccounts(req, res) {
     }
 }
 
-module.exports = { createAccountController, getAllUserAccounts }
+async function getBalance(req, res) {
+    try {
+        const { accountId } = req.params
+
+        if (!accountId) {
+            return res.status(400).json({
+                message: "accountId required for fetching balance!"
+            })
+        }
+
+        const account = await Account.findOne({
+            _id: accountId,
+            user: req.user._id
+        })
+
+        if (!account) {
+            return res.status(400).json({
+                message: "Account not found!"
+            })
+        }
+
+        const balance = await account.getBalance()
+
+        res.json({
+            message: "User account balance!",
+            balance: balance
+        })
+    } catch (error) {
+        res.status(400).json({
+            error: error.message
+        })
+    }
+}
+
+module.exports = { createAccountController, getAllUserAccounts, getBalance }
