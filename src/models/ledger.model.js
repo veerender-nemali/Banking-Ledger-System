@@ -8,7 +8,7 @@ const ledgerSchema = new mongoose.Schema({
         index: true,
         immutable: true
     },
-    ammount: {
+    amount: {
         type: Number,
         required: [true, "Amount required to create a ledger entry"],
         immutable: true
@@ -35,16 +35,16 @@ function preventLedgerModification() {
     throw new Error("Ledger entries cannot be modified or deleted")
 }
 
-LedgerSchema.pre("updateOne", preventLedgerModification)
-LedgerSchema.pre("deleteOne", preventLedgerModification)
-LedgerSchema.pre("findOneAndUpdate", preventLedgerModification)
-LedgerSchema.pre("findOneAndDelete", preventLedgerModification)
-LedgerSchema.pre("findOneAndReplace", preventLedgerModification)
-LedgerSchema.pre("replaceOne", preventLedgerModification)
-LedgerSchema.pre("updateMany", preventLedgerModification)
-LedgerSchema.pre("deleteMany", preventLedgerModification)
-LedgerSchema.pre("findOneAndRemove", preventLedgerModification)
-LedgerSchema.pre("remove", preventLedgerModification)
+ledgerSchema.pre("updateOne", preventLedgerModification)
+ledgerSchema.pre("deleteOne", preventLedgerModification)
+ledgerSchema.pre("findOneAndUpdate", preventLedgerModification)
+ledgerSchema.pre("findOneAndDelete", preventLedgerModification)
+ledgerSchema.pre("findOneAndReplace", preventLedgerModification)
+ledgerSchema.pre("replaceOne", preventLedgerModification)
+ledgerSchema.pre("updateMany", preventLedgerModification)
+ledgerSchema.pre("deleteMany", preventLedgerModification)
+ledgerSchema.pre("findOneAndRemove", preventLedgerModification)
+ledgerSchema.pre("remove", preventLedgerModification)
 
 const Ledger = mongoose.model("Ledger", ledgerSchema)
 
